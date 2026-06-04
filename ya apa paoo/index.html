@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Putri & Andi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. HALAMAN COVER -->
+    <div id="coverPage" class="cover-container">
+        <div class="cover-overlay"></div>
+        <video autoplay loop muted playsinline class="cover-video">
+            <source src="il.mp4" type="video/mp4">
+        </video>
+        
+        <div class="cover-content">
+            <p class="cover-sub">The Wedding of</p>
+            <h1 class="cover-title">Putri & Andi</h1>
+            
+            <div class="yth-box">
+                <p>Kepada Yth.<br>Bapak/Ibu/Saudara/i:</p>
+                <h3 id="namaTamu">Ilda Riani</h3>
+                <h5 id="Lok">Di Tempat</h5>
+                <p style="font-size: 0.50rem; margin-top: 5px; font-style: italic;">*Mohon maaf apabila ada kesalahan penulisan nama/gelar</p>
+            </div>
+            
+            <button class="btn-buka" onclick="bukaUndangan()">Open Invitation</button>
+        </div>
+    </div>
+
+    <!-- 2. ELEMEN AUDIO (SUDAH BERSIH TIDAK GANDA) -->
+    <audio id="weddingSong" loop>
+        <source src="ya.mp3" type="audio/mpeg">
+    </audio>
+    <button id="musicBtn" class="music-control" onclick="toggleMusic()">🎵</button>
+
+    <!-- 3. HERO SECTION (VIDEO BACKGROUND) -->
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="kacangijo.mp4" type="video/mp4">
+        </video>
+
+        <p class="hero-anim-1">The Wedding of</p>
+        <h1 class="hero-anim-2">Putri & Andi</h1>
+        <p class="hero-anim-3">08.06.2026</p>
+    </div>
+
+    <!-- 4. SEKSI MEMPELAI -->
+    <div class="section" style="padding: 60px 15px;">
+</div>
+        
+        <div class="card-3d" data-aos="fade-up" data-aos-duration="1500" 
+             style="max-width: 550px; margin: 0 auto; padding: 40px 25px; border-radius: 20px; background: rgba(255, 255, 255, 0.85); box-shadow: 0 15px 35px rgba(0,0,0,0.08); position: relative; border: 1px solid rgba(255, 255, 255, 0.5); overflow: hidden;">
+            
+            
+
+            <div style="text-align: center; margin-bottom: 35px;">
+                <p data-aos="zoom-in-up" data-aos-delay="300" data-aos-duration="1200" 
+                   style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bfa37a; margin-bottom: 10px;">
+                   Bismillahirrahmanirrahim
+                </p>
+                <p data-aos="zoom-in-up" data-aos-delay="500" data-aos-duration="1200" 
+                   style="font-size: 0.85rem; font-style: italic; color: #556b2f; line-height: 1.6; padding: 0 10px;">
+                    "Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah, dengan memohon rahmat-Mu, perkenankanlah kami menyatukan putra-putri kami:"
+                </p>
+                <div style="width: 50px; height: 1px; background: #bfa37a; margin: 20px auto 0 auto; opacity: 0.5;"></div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 40px;">
+                
+                <h3 data-aos="flip-up" data-aos-delay="700" data-aos-duration="1200" 
+                    style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #bfa37a; margin-bottom: 5px; font-weight: normal;">
+                    Andi Syaputra
+                </h3>
+                <p data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" 
+                   style="font-size: 0.85rem; color: #4a5d4e; font-weight: 400;">
+                    Putra dari Bapak Rusli & Ibu Mesinem
+                </p>
+                
+                <div data-aos="flip-right" data-aos-delay="1100" data-aos-duration="1000" 
+                     style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: #bfa37a; margin: 15px 0;">
+                     &
+                </div>
+                
+                <h3 data-aos="flip-up" data-aos-delay="1300" data-aos-duration="1200" 
+                    style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #bfa37a; margin-bottom: 5px; font-weight: normal;">
+                    Putri Ayu Lestari
+                </h3>
+                <p data-aos="fade-up" data-aos-delay="1500" data-aos-duration="1000" 
+                   style="font-size: 0.85rem; color: #4a5d4e; font-weight: 400;">
+                    Putri dari Bapak Anto & Ibu Hasni
+                </p>
+                
+                <div style="width: 80%; height: 1px; background: linear-gradient(to right, transparent, #bfa37a, transparent); margin: 35px auto 0 auto; opacity: 0.5;"></div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <p data-aos="zoom-in-up" data-aos-delay="1700" data-aos-duration="1000" 
+                   style="font-size: 0.9rem; font-weight: 600; color: #2f3e35; letter-spacing: 1px; margin-bottom: 5px;">
+                   Assalamu'alaikum Wr. Wb.
+                </p>
+                <p data-aos="zoom-in-up" data-aos-delay="1900" data-aos-duration="1200" 
+                   style="font-size: 0.85rem; color: #697c71; line-height: 1.5; padding: 0 15px;">
+                    Ungkapan kebahagiaan yang teramat besar bagi kami apabila rekan-rekan berkenan hadir memberikan doa restu pada:
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+            <div style="text-align: center; background: rgba(111, 134, 117, 0.05); padding: 25px 20px; border-radius: 15px; border: 1px solid rgba(191, 163, 122, 0.2); margin-bottom: 30px;">
+                <p style="font-size: 1.1rem; font-weight: 600; color: #bfa37a; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">—— AKAD NIKAH ——</p>
+                <p style="font-size: 0.9rem; font-weight: 600; color: #2f3e35; margin-bottom: 5px;">Minggu, 08 Juni 2026</p>
+                <p style="font-size: 0.85rem; color: #697c71; margin-bottom: 15px;">Pukul: 10.00 WITA - Selesai</p>
+                <p style="font-size: 0.85rem; color: #2f3e35; line-height: 1.5;">
+                    <strong style="color: #4a5d4e;">Di kediaman mempelai Wanita</strong><br>Pucceda Nepo
+                </p>
+                
+                <a href="https://maps.app.goo.gl/qcbDhHJjY7MXaXsR9" target="_blank" class="btn-maps" 
+                   style="display: inline-block; margin-top: 15px; padding: 10px 25px; font-size: 0.8rem; letter-spacing: 1px;">
+                    Lihat Lokasi Maps 📍
+                </a>
+            </div>
+                       <div class="countdown-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 35px;">
+                <div class="countdown-box" style="background: rgba(111, 134, 117, 0.1); border: 1px solid rgba(191, 163, 122, 0.3); color: #2f3e35; min-width: 65px; padding: 8px;"><span id="days" style="color: #bfa37a; display:block; font-size:1.2rem; font-weight:600;">00</span>Hari</div>
+                <div class="countdown-box" style="background: rgba(111, 134, 117, 0.1); border: 1px solid rgba(191, 163, 122, 0.3); color: #2f3e35; min-width: 65px; padding: 8px;"><span id="hours" style="color: #bfa37a; display:block; font-size:1.2rem; font-weight:600;">00</span>Jam</div>
+                <div class="countdown-box" style="background: rgba(111, 134, 117, 0.1); border: 1px solid rgba(191, 163, 122, 0.3); color: #2f3e35; min-width: 65px; padding: 8px;"><span id="minutes" style="color: #bfa37a; display:block; font-size:1.2rem; font-weight:600;">00</span>Menit</div>
+                <div class="countdown-box" style="background: rgba(111, 134, 117, 0.1); border: 1px solid rgba(191, 163, 122, 0.3); color: #2f3e35; min-width: 65px; padding: 8px;"><span id="seconds" style="color: #bfa37a; display:block; font-size:1.2rem; font-weight:600;">00</span>Detik</div>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <p style="font-size: 0.85rem; color: #697c71; font-style: italic; line-height: 1.5;">
+                    "Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir..."
+                </p>
+                <p style="font-size: 0.9rem; font-weight: 600; color: #2f3e35; margin-top: 15px; letter-spacing: 1px;">Wassalamu'alaikum Wr. Wb.</p>
+                <p style="font-size: 0.8rem; color: #bfa37a; margin-top: 20px; font-weight: 600; letter-spacing: 1px;">KAMI YANG BERBAHAGIA</p>
+                <p style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: #2f3e35; margin-top: 5px;">Putri & Andi</p>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+        <div class="card-3d"
+data-aos="zoom-in-up"
+data-aos-duration="900"
+data-aos-delay="250"
+</div>
+           <h2 data-aos="title-soft">
+    Konfirmasi Kehadiran
+</h2>
+            <p style="font-size: 0.85rem; margin-bottom: 20px; color: #697c71;">Hai teman-teman! Tolong konfirmasi kehadiran kalian di sini yaa:</p>
+            
+            <form id="rsvpForm" style="text-align: left;">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #2f3e35;">Nama Kamu:</label>
+                    <input type="text" id="rsvpNama" placeholder="Ketik nama kamu..." required 
+                           style="width: 100%; padding: 11px 15px; border: 1px solid #cbd6ce; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; outline: none; background: #ffffff;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #2f3e35;">Apakah Kamu Datang?</label>
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 8px; cursor: pointer;">
+                        <input type="radio" name="statusHadir" value="Hadir" checked style="margin-right: 8px; accent-color: #bfa37a;"> Ya, Aku Pasti Datang! 🎉
+                    </label>
+                    <label style="display: block; font-size: 0.9rem; cursor: pointer;">
+                        <input type="radio" name="statusHadir" value="Berhalangan" style="margin-right: 8px; accent-color: #bfa37a;"> Maaf, Aku Berhalangan 🥺
+                    </label>
+                </div>
+                
+                <button type="button" class="btn-maps" onclick="kirimRSVP()" style="width: 100%; margin-top: 0; border: none; text-align: center; cursor: pointer;">
+                    Kirim via WhatsApp 💬
+                </button>
+            </form>
+        </div>
+
+        <div class="card-3d"
+data-aos="zoom-in-up"
+data-aos-delay="200"
+data-aos-duration="900"
+data-aos-delay="100"
+style="margin: 60px auto 0 auto;">
+            <h2 data-aos="title-soft">
+    Doa Restu & Ucapan
+</h2>
+            <p style="font-size: 0.85rem; margin-bottom: 20px; color: #697c71;">Tinggalkan pesan manis atau doa untuk Putri & Andi di bawah ini:</p>
+            
+            <div style="text-align: left; margin-bottom: 20px;">
+                <input type="text" id="namaUcapan" placeholder="Nama kamu..." 
+                       style="width: 100%; padding: 11px 15px; border: 1px solid #cbd6ce; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; margin-bottom: 10px; outline: none; background: #ffffff;">
+                <textarea id="teksUcapan" rows="3" placeholder="Tulis ucapan selamat di sini..." 
+                          style="width: 100%; padding: 11px 15px; border: 1px solid #cbd6ce; border-radius: 10px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; resize: none; outline: none; background: #ffffff;"></textarea>
+                <button type="button" class="btn-maps" onclick="tambahUcapanLokal()" style="width: 100%; margin-top: 10px; border: none; text-align: center; cursor: pointer;">
+                    Kirim Ucapan ✨
+                </button>
+            </div>
+            
+            <div id="boxAliranUcapan"
+style="
+max-height:250px;
+overflow-y:auto;
+text-align:left;
+background:#f8faf8;
+padding:20px;
+border-radius:15px;
+border:1px solid rgba(191,163,122,.15);
+margin-top:15px;
+">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

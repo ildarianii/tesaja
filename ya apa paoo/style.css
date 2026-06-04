@@ -1,0 +1,812 @@
+:root {
+    /* 1. Warna Latar Belakang */
+    --bg-gelap-sinematik: #141f19;  /* Hijau gelap pekat dengan tone sage untuk area video/cover agar menyatu */
+    --bg-terang-konten: #f4f7f5;    /* Warna dasar kertas/halaman bawah: Putih kehijauan sangat lembut (Sage White) */
+    --bg-kartu-mempelai: #ffffff;   /* Putih bersih murni untuk kotak mempelai/acara agar kontras & terbaca tajam */
+
+    /* 2. Warna Teks & Elemen Utama */
+    --warna-emas-premium: #8da493;  /* Warna Hijau Sage Utama untuk tombol, countdown, dan judul besar */
+    --warna-emas-muda: #cbd6ce;     /* Warna Sage Muda lembut untuk garis tepi (border) kartu-kartu */
+    --warna-teks-gelap: #2f3e35;    /* Hijau botol gelap keabuan untuk teks utama (jauh lebih lembut dibanding hitam kaku) */
+    --warna-teks-redup: #697c71;    /* Warna redup untuk kutipan surah atau keterangan kecil */
+}
+
+/* --- PENERAPAN PALET WARNA PADA ELEMEN --- */
+
+/* Latar belakang web secara keseluruhan */
+html {
+    background-color: var(--bg-gelap-sinematik);
+}
+body {
+    background-color: var(--bg-terang-konten);
+    color: var(--warna-teks-gelap);
+}
+
+/* Latar belakang section informasi bawah */
+.section, .section-quote {
+    background-color: var(--bg-terang-konten);
+}
+
+/* Warna judul utama ("Mempelai", "Waktu & Tempat") */
+h2 {
+    color: var(--warna-emas-premium);
+}
+
+/* Warna Kartu 3D Mempelai & Acara */
+.card-3d, .card-acara, .quote-container {
+    background: var(--bg-kartu-mempelai);
+    border: 1px solid var(--warna-emas-muda);
+}
+.nama-mempelai, .quote-surah {
+    color: var(--warna-emas-premium);
+}
+
+/* Warna Tombol & Kotak Countdown */
+.btn-buka, .btn-maps, .countdown-box, .music-control {
+    background-color: var(--warna-emas-premium);
+    color: #ffffff; /* Teks di dalam tombol tetap putih */
+}
+.btn-buka:hover, .btn-maps:hover {
+    background-color: #a3875e; /* Emas agak tua saat disentuh */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fcf8f2;
+    color: #4a4a4a;
+    text-align: center;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+/* --- HERO SECTION (DENGAN BACKGROUND VIDEO) --- */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+/* Mengatur Video agar Fullscreen di Background */
+.hero-video, .cover-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    /* SOLUSI UTAMA: Mengunci tinggi pas 100% layar HP agar tidak ada area kosong atas-bawah */
+    height: 100vh; 
+    
+    /* Lebar dibuat sedikit fleksibel agar tidak ketarik atau melar */
+    width: auto; 
+    
+    /* Menggunakan min-width 100% untuk memastikan area kanan-kiri tetap tertutup aman */
+    min-width: 100%; 
+    
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    
+    /* Menggunakan 'cover' tapi dikombinasikan dengan tinggi terkunci agar zoom-nya seminimal mungkin */
+    object-fit: cover; 
+    
+    /* Mencegah video terlihat blur/pecah akibat rendering browser HP */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Kunci latar belakang kontainer agar selalu hitam solid di belakang video */
+.hero, .cover-container {
+    background-color: #0a0a0a;
+    overflow: hidden;
+}
+
+/* Jika dibuka di Laptop (Layar Melebar), setingan otomatis aman */
+@media (orientation: landscape) or (min-width: 768px) {
+    .hero-video, .cover-video {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+}
+
+/* TWEAK OTOMATIS: Jika layar mendatar/lebar (Laptop atau HP miring) */
+@media (orientation: landscape) or (min-width: 768px) {
+    .hero-video, .cover-video {
+        /* Mengubah setelan menjadi 'cover' agar layar lebar penuh tanpa ada area kosong */
+        object-fit: cover; 
+    }
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 25px !important; 
+    padding: 20px;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+/* ==========================================================================
+   PENGATURAN REDUP VIDEO BACKGROUND HERO
+   ========================================================================== */
+
+.hero-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2 !important; /* Mengunci posisi di atas video tapi di bawah teks */
+    
+    /* 🔍 DI SINI TEMPAT ATUR REDUPNYA: */
+    background: linear-gradient(
+to bottom,
+rgba(0,0,0,.55),
+rgba(0,0,0,.15),
+rgba(0,0,0,.55)
+)
+}
+.hero h1, .hero p, .hero span,
+.hero-anim-1, .hero-anim-2, .hero-anim-3 {
+    position: static !important; 
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+    opacity: 0;
+    z-index: 3 !important;
+    transition: opacity 1.5s ease-in-out !important;
+}
+
+body.invitation-open .hero h1, 
+body.invitation-open .hero p, 
+body.invitation-open .hero span,
+body.invitation-open .hero-anim-1,
+body.invitation-open .hero-anim-2,
+body.invitation-open .hero-anim-3 {
+    opacity: 1 !important;
+}
+
+body.invitation-open .hero-anim-1 { transition-delay: 1.2s !important; }
+body.invitation-open .hero-anim-2 { transition-delay: 1.8s !important; }
+body.invitation-open .hero-anim-3 { transition-delay: 2.4s !important; }
+
+/* TEKS PEMBUKA & TANGGAL PUTIH BERSIH */
+.hero-anim-1, .hero-anim-3 {
+    color: #ffffff !important; 
+    font-size: 0.95rem !important;
+    letter-spacing: 4px !important;
+    text-transform: uppercase !important;
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.7)) !important;
+}
+
+/* NAMA MEMPELAI: KUNCI WARNA EMAS MURNI + EFEK SHINE MENYAPU */
+.hero-anim-2 {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 5rem !important;
+    display: inline-block !important;
+    
+    /* Mengunci warna emas dasar agar tetap tajam, solid, dan tidak pecah */
+    color: #e2ba6e !important;
+    
+    /* Membuat jalur lintasan logam mengkilap (putih) di atas warna emas */
+    background: linear-gradient(120deg, #e2ba6e 35%, #ffffff 50%, #e2ba6e 65%) !important;
+    background-size: 200% auto !important;
+    
+    /* Memotong kilatan agar hanya menyapu di area huruf */
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.7)) !important;
+    
+    /* MENJALANKAN SAPUAN SHINE SEBANYAK 2 KALI SAJA */
+    animation: sapuanShineMewah 2.5s ease-in-out 2 forwards !important;
+    animation-delay: 2.5s !important; /* Mulai menyapu saat nama sudah muncul utuh */
+}
+
+/* Pergerakan cahaya menyapu dari ujung kata Putri sampai ujung kata Andi */
+@keyframes sapuanShineMewah {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero { gap: 35px !important; }
+    .hero-anim-2 { font-size: 7.5rem !important; }
+    .hero-anim-1, .hero-anim-3 {
+         font-size: 1.1rem !important; 
+         font-weight: 600;
+         letter-spacing: 6px !important; 
+        }
+}
+/* --- SECTION STYLE --- */
+.section {
+    padding: 80px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #bfa37a;
+    margin-bottom: 30px;
+}
+
+/* --- 3D MEMPELAI CARDS --- */
+.mempelai-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    margin-top: 30px;
+}
+.card-3d {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+.card-3d.aos-animate{
+    box-shadow:
+    0 0 25px rgba(191,163,122,.08),
+    0 15px 45px rgba(0,0,0,.08);
+}
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #f1d2a9;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+    transform-style: preserve-3d;
+    width: 100%;
+    max-width: 320px;
+}
+.card-3d:hover {
+    transform: translateY(-10px) rotateX(10px) rotateY(10px);
+    box-shadow: 0 20px 40px rgba(191, 163, 122, 0.3);
+}
+.nama-mempelai {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #bfa37a;
+    margin-bottom: 10px;
+    transform: translateZ(30px);
+}
+
+/* --- ACARA CARD --- */
+.card-acara {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    margin-top: 30px;
+    border: 1px solid #f1d2a9;
+    transition: transform 0.3s;
+}
+.card-acara:hover {
+    transform: scale(1.02);
+}
+
+/* --- COUNTDOWN --- */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+.countdown-box {
+    background: #bfa37a;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    min-width: 75px;
+    box-shadow: 0 5px 15px rgba(191, 163, 122, 0.4);
+}
+.countdown-box span {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.btn-maps {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background-color: #bfa37a;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(191, 163, 122, 0.4);
+    transition: 0.3s;
+}
+.btn-buka:hover, .btn-maps:hover {
+    background-color: #6e8574 !important; /* Sage yang sedikit lebih gelap dan dewasa saat disentuh */
+}
+
+/* Modifikasi kotak Kepada Yth di halaman cover agar menyatu dengan video hijau */
+.yth-box {
+    background: rgba(203, 214, 206, 0.15) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.yth-box h3 {
+    color: #ffffff !important; /* Nama tamu dibuat putih bersih agar menyala di atas video hijau */
+}
+
+/* --- FLOATING MUSIC BUTTON --- */
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background-color: #bfa37a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.music-control:hover { transform: scale(1.1); }
+.rotate { animation: spin 4s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* RESPONSIVE */
+@media (min-width: 768px) {
+    .mempelai-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+    }
+    .hero h1 { font-size: 7rem; }
+}
+/* --- GAYA UNTUK HALAMAN COVER --- */
+body.locked {
+    overflow: hidden; /* Mengunci scroll sebelum undangan dibuka */
+}
+
+.cover-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    transition: opacity 0.5s ease-in-out; /* DIUBAH JADI 0.5s agar memudar lebih cepat */
+    overflow: hidden;
+}
+
+.cover-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2 !important;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.15),
+        rgba(0,0,0,.55)
+    ) !important;
+}
+
+.cover-content {
+    position: relative;
+    z-index: 3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.cover-sub {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.cover-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4.5rem;
+    color: #f1d2a9;
+    margin-bottom: 30px;
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.yth-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(241, 210, 169, 0.5);
+    padding: 25px 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.yth-box p {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.yth-box h3 {
+    font-size: 1.6rem;
+    color: #f1d2a9;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.btn-buka {
+    padding: 14px 35px;
+    background-color: #bfa37a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(191, 163, 122, 0.4);
+    transition: 0.3s;
+}
+
+.btn-buka:hover {
+    background-color: #a3875e;
+    transform: scale(1.05);
+}
+
+.cover-opened {
+    opacity: 0;
+    pointer-events: none;
+}
+.hero-anim-1, .hero-anim-2, .hero-anim-3 {
+    opacity: 0;
+    transition: opacity 2s ease-in-out; /* Efek kedip muncul yang sangat lembut */
+}
+.hero-anim-2 {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 5rem !important;
+    display: inline-block !important;
+    
+    /* 1. MENGUNCI WARNA EMAS ASLI (TIDAK AKAN BERUBAH SAMA SEKALI) */
+    color: #e2ba6e !important;
+    -webkit-text-fill-color: #e2ba6e !important; /* Mengunci warna emas solid agar tidak transparan */
+    background: none !important; /* Bersihkan background agar tidak merusak warna */
+    
+    /* 2. EFEK SHINE (Menggunakan Masking agar warna emas asli tidak tersentuh) */
+    -webkit-mask-image: linear-gradient(
+        120deg, 
+        rgba(0, 0, 0, 1) 40%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 1) 60%
+    ) !important;
+    mask-image: linear-gradient(
+        120deg, 
+        rgba(0, 0, 0, 1) 40%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 1) 60%
+    ) !important;
+    -webkit-mask-size: 200% 100% !important;
+    mask-size: 200% 100% !important;
+    
+    /* 3. BAYANGAN TEKS BERSIH */
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.7)) !important;
+    
+    /* 4. JALANKAN ANIMASI SHINE 2 KALI SAJA */
+    animation: sapuanShineMurni 2.5s ease-in-out 2 forwards !important;
+    animation-delay: 2.5s !important; /* Mulai menyapu setelah nama muncul utuh */
+}
+
+/* RUMUS ANIMASI: Menggeser efek pantulan cahaya melewati permukaan teks */
+@keyframes sapuanShineMurni {
+    0% {
+        -webkit-mask-position: 150% 0;
+        mask-position: 150% 0;
+    }
+    100% {
+        -webkit-mask-position: -150% 0;
+        mask-position: -150% 0;
+    }
+}
+
+/* RESPONSIVE LAYAR LAPTOP */
+@media (min-width: 768px) {
+    .hero-anim-2 { font-size: 7.5rem !important; }
+}
+
+/* 3. Pemicu Muncul Serentak di Detik ke-6 setelah Klik */
+body.invitation-open .hero-anim-1,
+body.invitation-open .hero-anim-2,
+body.invitation-open .hero-anim-3 {
+    opacity: 1;
+}
+
+/* Kita atur jeda masuknya pas di detik ke-6 (6000ms) */
+body.invitation-open .hero-anim-1 {
+     transition-delay: 0.5s; }
+body.invitation-open .hero-anim-2 {
+     transition-delay: 1s; } /* Nama mempelai muncul sedikit setelah teks pembuka */
+body.invitation-open .hero-anim-3 { 
+     transition-delay: 1.5s; }
+
+/* 4. Memicu Animasi Kilatan Menyapu setelah Nama Mempelai Muncul Sempurna */
+body.invitation-open .hero-anim-2 {
+    animation: kilatCahaya 3s ease-in-out forwards;
+    animation-delay: 8.5s; /* Kilatan berjalan setelah nama muncul utuh */
+}
+
+/* Pergerakan Kilatan Cahaya dari Kiri ke Kanan */
+@keyframes kilatCahaya {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+.btn-buka, .btn-maps {
+    position: relative;
+    overflow: hidden;
+    animation: denyutTombol 2s infinite alternate;
+}
+
+.btn-buka::after, .btn-maps::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: kilatTombol 4s infinite ease-in-out;
+}
+
+@keyframes kilatTombol {
+    0% { left: -50%; }
+    30% { left: 150%; }
+    100% { left: 150%; }
+}
+
+@keyframes denyutTombol {
+    0% { box-shadow: 0 5px 15px rgba(212, 163, 179, 0.4); }
+    100% { box-shadow: 0 8px 25px rgba(212, 163, 179, 0.8); transform: scale(1.02); }
+}
+
+/* --- 2. Pembaruan Efek Bayangan 3D Kartu Mempelai --- */
+.card-3d {
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+.card-3d:hover{
+    transform:
+        translateY(-8px)
+        rotateX(4deg);
+        
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.12),
+        0 0 25px rgba(191,163,122,.15);
+}
+
+/* --- 3. Efek Kelopak Bunga Pink Berguguran (Dibuat via CSS) --- */
+.kelopak-pink {
+    position: fixed;
+    top: -10px;
+    background: linear-gradient(135deg, #ffdee9 0%, #b5fffc 100%); /* Warna pink soft transparan */
+    background: rgba(243, 209, 220, 0.7);
+    border-radius: 0 70% 40% 70%;
+    z-index: 999;
+    pointer-events: none;
+    animation: gugur 10s linear infinite;
+}
+
+@keyframes gugur {
+    0% { top: -10px; transform: translateX(0) rotate(0deg); opacity: 1; }
+    100% { top: 100vh; transform: translateX(100px) rotate(360deg); opacity: 0; }
+}
+.lux-divider{
+    text-align:center;
+    font-size:2rem;
+    color:#bfa37a;
+    padding:20px 0 40px;
+    opacity:.7;
+}
+input,
+textarea{
+    transition:.3s ease;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#bfa37a !important;
+    box-shadow:0 0 15px rgba(191,163,122,.15);
+}
+.nama-mempelai{
+    font-family:'Great Vibes', cursive;
+    font-size:2.2rem !important;
+    line-height:1.5 !important;
+    display:block;
+    text-align:center;
+    margin-bottom:20px !important;
+}
+#rsvpForm,
+#boxAliranUcapan{
+    margin-top:20px;
+}
+.card-3d{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.hero{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.hero-anim-2{
+    text-align: center;
+    max-width: 90%;
+}
+.countdown-box{
+    min-width: 75px !important;
+    padding: 15px 10px !important;
+    backdrop-filter: blur(10px);
+    border-radius: 18px !important;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.05),
+        0 0 20px rgba(191,163,122,.08);
+
+    transition: .3s;
+}
+
+.countdown-box:hover{
+    transform: translateY(-5px);
+}
+.btn-maps{
+    border-radius: 999px;
+    padding: 13px 35px;
+
+    box-shadow:
+        0 12px 25px rgba(191,163,122,.18);
+
+    transition:.3s;
+}
+
+.btn-maps:hover{
+    transform:translateY(-3px);
+}
+[data-aos="title-soft"]{
+    opacity: 0;
+    transform: scale(.96);
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+[data-aos="title-soft"].aos-animate{
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Mencegah judul nabrak teks lain */
+#rsvp h2,
+#ucapan h2{
+    line-height: 1.3;
+    margin-bottom: 40px;
+}
+#mempelai{
+    position:relative;
+}
+.section{
+    position: relative;
+}
+
+.section::before{
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 90px;
+    height: 90px;
+
+    background: url('images/bunga-kiri.png') no-repeat center;
+    background-size: contain;
+
+    opacity: .18;
+    pointer-events: none;
+}
+
+.section::after{
+    content: "";
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 90px;
+    height: 90px;
+
+    background: url('images/bunga-kanan.png') no-repeat center;
+    background-size: contain;
+
+    opacity: .18;
+    pointer-events: none;
+}
+.section{
+    position: relative;
+}
+
+.section::before{
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    width: 100px;
+    height: 100px;
+
+    background: url('images/bungakanan.jpg') no-repeat center;
+    background-size: contain;
+
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.section::after{
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+
+    width: 100px;
+    height: 100px;
+
+    background: url('images/bunga.jpg') no-repeat center;
+    background-size: contain;
+
+    opacity: 0.15;
+    pointer-events: none;
+
+    transform: rotate(180deg);
+}
